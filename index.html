@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FASHO STUDIO</title>
+<style>
+:root{--gold:#FFD700;--gold2:#FFA500;--black:#070707;--card:#131313;--card2:#1a1a1a;--border:#222;--text:#f2f2f2;--muted:#666;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--text);font-family:system-ui,sans-serif;min-height:100vh;}
+.header{padding:20px;text-align:center;background:#111;border-bottom:3px solid var(--gold);}
+.logo{font-size:32px;font-weight:bold;color:var(--gold);letter-spacing:4px;}
+.mode-row{display:flex;background:#111;margin:10px;padding:4px;border-radius:12px;}
+.mode-btn{flex:1;padding:14px;text-align:center;border-radius:10px;font-size:15px;font-weight:600;}
+.mode-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.container{padding:15px;}
+.api-bar{background:#111;border:1px solid var(--gold);border-radius:12px;padding:12px;margin-bottom:15px;}
+input, textarea, button{width:100%;padding:14px;margin:8px 0;border-radius:8px;font-size:16px;}
+input, textarea{background:#222;border:1px solid var(--border);color:white;}
+button{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;font-weight:bold;}
+button:active{transform:scale(0.98);}
+.status{padding:10px;text-align:center;color:var(--gold);}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">FASHO STUDIO</div>
+</div>
+
+<div class="mode-row">
+  <div class="mode-btn active" onclick="setMode('builder')">Step by Step</div>
+  <div class="mode-btn" onclick="setMode('director')">Director Mode</div>
+</div>
+
+<div class="container">
+  <div class="api-bar">
+    <input type="text" id="apiKey" placeholder="r8_xxxxxxxxxxxxxxxxxxxx">
+    <button onclick="saveKey()">SAVE KEY</button>
+  </div>
+
+  <div id="directorMode">
+    <h2 style="color:var(--gold);margin:20px 0 10px;">Director Mode</h2>
+    <p style="color:var(--muted);margin-bottom:15px;">Upload photos of everyone, drop your song, then describe the entire music video in one prompt.</p>
+    
+    <textarea id="prompt" rows="5" placeholder="Me and my crew on a rooftop in Houston at night..."></textarea>
+    <button onclick="runDirector()" style="margin-top:15px;">🎬 GENERATE MUSIC VIDEO</button>
+  </div>
+</div>
+
+<script>
+function setMode(mode) {
+  document.getElementById('directorMode').style.display = (mode === 'director') ? 'block' : 'none';
+}
+
+function saveKey() {
+  const key = document.getElementById('apiKey').value.trim();
+  if (key) {
+    localStorage.setItem('fashoKey', key);
+    alert("✅ API Key saved!");
+  }
+}
+
+function runDirector() {
+  const key = localStorage.getItem('fashoKey');
+  if (!key) {
+    alert("Please save your Replicate API key first");
+    return;
+  }
+  alert("Generation started with your key.\n\n(Full video model coming next if you want it)");
+}
+
+window.onload = () => {
+  const saved = localStorage.getItem('fashoKey');
+  if (saved) document.getElementById('apiKey').value = saved;
+};
+</script>
+
+</body>
+</html>
