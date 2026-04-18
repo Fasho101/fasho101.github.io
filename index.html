@@ -3,44 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASHO STUDIO</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Fasho101 - Builder & Director Mode</title>
-    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Fasho101's Project</h1>
-        <button id="toggleMode">Switch Mode</button>
-    </header>
-    <main>
-        <div id="builderMode" class="mode">
-            <h2>Builder Mode</h2>
-            <label for="uploadPhoto">Upload Photo:</label>
-            <input type="file" id="uploadPhoto" name="uploadPhoto" accept="image/*">
-            <label for="songSelection">Select a Song:</label>
-            <select id="songSelection" name="songSelection">
-                <option value="song1.mp3">Song 1</option>
-                <option value="song2.mp3">Song 2</option>
-                <option value="song3.mp3">Song 3</option>
-            </select>
-            <label for="sceneDescription">Scene Description:</label>
-            <textarea id="sceneDescription" name="sceneDescription"></textarea>
+    <div id="app">
+        <h1>Welcome to FASHO STUDIO</h1>
+        <div>
+            <button id="stepByStepBtn">Step by Step Mode</button>
+            <button id="directorModeBtn">Director Mode</button>
         </div>
-        <div id="directorMode" class="mode hidden">
-            <h2>Director Mode</h2>
-            <p>Scene settings and configurations.</p>
+        <div id="modeContent">
+            <h2 id="modeTitle">Select a mode to begin</h2>
+            <p id="modeDescription">Choose either Step by Step or Director Mode.</p>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2026 Fasho101. All Rights Reserved.</p>
-    </footer>
-    <script>
-        document.getElementById('toggleMode').addEventListener('click', function() {
-            var builderMode = document.getElementById('builderMode');
-            var directorMode = document.getElementById('directorMode');
-            builderMode.classList.toggle('hidden');
-            directorMode.classList.toggle('hidden');
-        });
-    </script>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
